@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   todoItemText: {
     flex: 1, // Allow the text to take up remaining space
     marginRight: 8,
+    textAlign: 'center',
     color: '#333',
   },
   completed: {

@@ -33,13 +33,18 @@ const TodoItem = ({task, deleteTask, toggleCompleted, updateTask}) => {
         onChange={() => toggleCompleted(task.id)}
         value={task.completed}
       />
-      <TextInput onChangeText={setTextUpdated} value={text} maxLength={40} />
+      {task.completed ? 
+            <Text style={getStyles()}>{text}</Text> : 
+            <TextInput onChangeText={setTextUpdated} value={text} maxLength={40} />
+      }
+      
       <View>
-      <Pressable
+      {task.completed ? "" : <Pressable
         style={styles.addButton}
         onPress={() => updateTask(task.id, text)}>
         <Text style={{color: '#fff'}}>Save</Text>
       </Pressable>
+      }
       <Pressable
         style={styles.deleteButton}
         onPress={() => deleteTask(task.id)}>

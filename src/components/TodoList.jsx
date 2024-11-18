@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, TextInput, Button, FlatList, Pressable, Text} from 'react-native';
 import TodoItem from './TodoItem';
 import styles from '../assets/styles/todoItem';
+import ModalAlert from './ModalAlert';
 
 export default function TodoList() {
   // State Hooks
@@ -11,6 +12,7 @@ export default function TodoList() {
   ]);
 
   const [text, setText] = useState('');
+  const [modal, setModal] = useState(false);
   // Function to Add Task
 
   function addTask() {
@@ -39,6 +41,13 @@ export default function TodoList() {
     );
   }
 
+  function toggleModal(){
+    setModal(true);
+  }
+
+  function toggleModalOff(){
+    setModal(false);
+  }
 
   function updateTask(id, text) {
     setTasks(
@@ -46,11 +55,14 @@ export default function TodoList() {
         task.id === id ? {...task, text: text} : task,
       ),
     );
+    toggleModal();
   }
 
 
   // Render TodoList Component
   return (
+    <>
+    <ModalAlert showModal={modal} behavior={toggleModalOff} />
     <View>
       <FlatList
         bounces={true}
@@ -83,5 +95,6 @@ export default function TodoList() {
         </Pressable>
       </View>
     </View>
+    </>
   );
 }
